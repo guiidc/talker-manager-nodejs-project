@@ -42,4 +42,20 @@ router.post('/',
     await fs.writeFile(talkersList, JSON.stringify(list));    
 });
 
+router.put('/:id',
+  tokenMiddleware,
+  nameMiddleware,
+  ageMiddleware,
+  talkMiddleware,
+  talkDataMiddleWare, async (req, res) => {
+    const { id } = req.params;
+    const { name, age, talk } = req.body;
+    let list = await fs.readFile(talkersList);
+    list = JSON.parse(list);
+    const actualIndex = list.findIndex((actualTalk) => actualTalk.id === Number(id));
+    list[actualIndex] = { name, age, id: Number(id), talk };
+    await fs.writeFile(talkersList, JSON.stringify(list));
+    res.status(200).json(list[actualIndex]);
+});
+
 module.exports = router;
