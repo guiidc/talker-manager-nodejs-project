@@ -17,6 +17,14 @@ router.get('/', (_req, res) => {
   .then((talkers) => res.status(200).json(JSON.parse(talkers)));
 });
 
+router.get('/search', tokenMiddleware, async (req, res) => {
+  const { q } = req.query;
+  let list = await fs.readFile(talkersList);
+  list = JSON.parse(list);
+  const newList = list.filter(({ name }) => name.includes(q));
+  res.status(200).json(newList);
+});
+
 router.get('/:id', async (req, res) => {
   const { id } = req.params;
   let list = await fs.readFile(talkersList);
