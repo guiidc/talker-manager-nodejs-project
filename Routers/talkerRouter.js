@@ -3,7 +3,7 @@ const fs = require('fs').promises;
 
 const talkersList = './talker.json';
 
-router.get('/', (req, res) => {
+router.get('/', (_req, res) => {
   fs.readFile(talkersList)
   .then((talkers) => res.status(200).json(JSON.parse(talkers)));
 });
