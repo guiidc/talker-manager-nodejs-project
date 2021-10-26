@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 
 // internals imports
 const talkerRouter = require('./Routers/talkerRouter');
+const loginRouter = require('./Routers/loginRouter');
 
 const app = express();
 app.use(bodyParser.json());
@@ -21,3 +22,6 @@ app.listen(PORT, () => {
 });
 
 app.use('/talker', talkerRouter);
+
+app.use('/login', loginRouter);
+
