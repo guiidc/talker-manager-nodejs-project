@@ -63,7 +63,7 @@ router.delete('/:id', tokenMiddleware, async (req, res) => {
   let list = await fs.readFile(talkersList);
   list = JSON.parse(list);
   const newList = list.filter((talk) => talk.id !== Number(id));
-  console.log(newList)
+  console.log(newList);
   await fs.writeFile(talkersList, JSON.stringify(newList));
   res.status(200).json({ message: 'Pessoa palestrante deletada com sucesso' });
 });
